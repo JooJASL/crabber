@@ -70,8 +70,8 @@ func spawn_downer():
 	print("spawn_downer timeout")
 	var downer = downer_scene.instance()
 	
-	downer.global_position = Vector2(OS.get_real_window_size().x, 20)
-	downer.linear_velocity = Vector2(0, rand_range(50, 90))
+	downer.global_position = Vector2(rand_range(0, OS.get_real_window_size().x),
+	 20)
 	add_child(downer)
 
 
@@ -81,8 +81,7 @@ func spawn_upper():
 	print("spawn_upper timeout")	
 	var upper = upper_scene.instance()
 	
-	upper.global_position = Vector2(OS.get_real_window_size().x, 20)
-	upper.linear_velocity = Vector2(0, rand_range(50, 90))
+	upper.global_position = Vector2(rand_range(0, OS.get_real_window_size().x), 20)
 	add_child(upper)
 
 
