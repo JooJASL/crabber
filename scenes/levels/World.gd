@@ -109,3 +109,7 @@ func _get_configuration_warning():
 
 
 
+
+
+func _on_ItemDestroyer_body_entered(body):
+	body.queue_free()
