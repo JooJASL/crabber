@@ -30,7 +30,7 @@ func _ready():
 	player.survival_gain_rate = survival_value
 	player.set_score(player_initial_score)
 	
-	# Setting up timers.
+	# Setting up timers. Programatically so it's less work making more levels.
 	start_timer = Timer.new()
 	start_timer.wait_time = start_game_interval
 	start_timer.one_shot = true
@@ -103,12 +103,6 @@ func _get_configuration_warning():
 		return "Must select a scene to be \"downer\""
 	
 	return "" # if nothing's wrong.
-
-
-
-
-
-
 
 
 func _on_ItemDestroyer_body_entered(body):
