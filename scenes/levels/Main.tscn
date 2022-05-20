@@ -10,6 +10,8 @@ extents = Vector2( 264.5, 17 )
 [node name="Main" type="Node2D"]
 position = Vector2( 72, 72 )
 script = ExtResource( 3 )
+upper_scene = ExtResource( 2 )
+downer_scene = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 80, 584 )
@@ -26,3 +28,8 @@ position = Vector2( 80, 384 )
 
 [node name="FallingItem2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 72, 40 )
+
+[node name="StartPosition" type="Position2D" parent="."]
+position = Vector2( 24, 560 )
+
+[node name="Timer" type="Timer" parent="."]

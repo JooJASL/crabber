@@ -42,4 +42,5 @@ func _on_Collector_body_entered(body: FallingItem):
 
 
 func _on_ScoreTimer_timeout():
+	print("scoretimer_timeout")
 	set_score(score + survival_gain_rate)
