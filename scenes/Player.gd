@@ -4,20 +4,23 @@ extends KinematicBody2D
 signal died()
 
 export(int) var speed = 200
-export(float) var gravity = 9.8
-
-var survival_gain_rate := 1
+export(float) var gravity = 90
 
 onready var score_label := $CanvasLayer/GUI/Score
 
+var survival_gain_rate := 1
+
+
 var score := 0
+
+func get_score():
+	return score
+
 
 func set_score(value):
 	score = value
 	score_label.text = str(score)
 
-func get_score():
-	return score
 
 func _physics_process(delta):
 	movement()
@@ -44,3 +47,4 @@ func _on_Collector_body_entered(body: FallingItem):
 func _on_ScoreTimer_timeout():
 	print("scoretimer_timeout")
 	set_score(score + survival_gain_rate)
+
