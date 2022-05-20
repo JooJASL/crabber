@@ -6,6 +6,7 @@ tool # So editor warnings become enabled.
 export(float) var start_game_interval := 3
 export(float) var upper_spawn_interval := 3
 export(float) var downer_spawn_interval := 3
+export(float, 0, 1) var randomize_spawn_intervals := 0.25
 
 
 ## How much Player gains for surviving, per second. Defaults to 1. Can be negative.
@@ -38,12 +39,12 @@ func _ready():
 	add_child(start_timer)
 	
 	downer_timer = Timer.new()
-	downer_timer.wait_time = rand_range(downer_spawn_interval - (downer_spawn_interval * 0.25), downer_spawn_interval + (downer_spawn_interval * 0.25))
+	downer_timer.wait_time = rand_range(downer_spawn_interval - (downer_spawn_interval * 0.25), downer_spawn_interval + (downer_spawn_interval * randomize_spawn_intervals))
 	downer_timer.connect("timeout", self, "spawn_downer")
 	add_child(downer_timer)
 	
 	upper_timer = Timer.new()
-	upper_timer.wait_time = rand_range(upper_spawn_interval - (upper_spawn_interval * 0.25), upper_spawn_interval + (upper_spawn_interval * 0.25))	
+	upper_timer.wait_time = rand_range(upper_spawn_interval - (upper_spawn_interval * 0.25), upper_spawn_interval + (upper_spawn_interval * randomize_spawn_intervals))	
 	upper_timer.connect("timeout", self, "spawn_upper")
 	add_child(upper_timer)
 	
