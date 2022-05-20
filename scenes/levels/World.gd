@@ -38,12 +38,12 @@ func _ready():
 	add_child(start_timer)
 	
 	downer_timer = Timer.new()
-	downer_timer.wait_time = downer_spawn_interval
+	downer_timer.wait_time = rand_range(downer_spawn_interval - (downer_spawn_interval * 0.25), downer_spawn_interval + (downer_spawn_interval * 0.25))
 	downer_timer.connect("timeout", self, "spawn_downer")
 	add_child(downer_timer)
 	
 	upper_timer = Timer.new()
-	upper_timer.wait_time = upper_spawn_interval
+	upper_timer.wait_time = rand_range(upper_spawn_interval - (upper_spawn_interval * 0.25), upper_spawn_interval + (upper_spawn_interval * 0.25))	
 	upper_timer.connect("timeout", self, "spawn_upper")
 	add_child(upper_timer)
 	
@@ -73,6 +73,9 @@ func spawn_downer():
 	downer.global_position.x = rand_range(0, OS.get_real_window_size().x - 50) # 50 arbitrary
 	downer.global_position.y = rand_range(10, 50) # arbitrary numbersr
 	add_child(downer)
+	
+	downer_timer.wait_time = rand_range(downer_spawn_interval - (downer_spawn_interval * 0.25), downer_spawn_interval + (downer_spawn_interval * 0.25))
+	
 
 
 ## spawn_upper spawns falling objects that either increase the score of the
@@ -84,6 +87,9 @@ func spawn_upper():
 	upper.global_position.x = rand_range(0, OS.get_real_window_size().x - 50) # the 50 is arbitrary
 	upper.global_position.y = rand_range(10, 80) # arbitrary numbersr
 	add_child(upper)
+	
+	upper_timer.wait_time = rand_range(upper_spawn_interval - (upper_spawn_interval * 0.25), upper_spawn_interval + (upper_spawn_interval * 0.25))	
+	
 
 
 func _get_configuration_warning():
