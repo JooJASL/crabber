@@ -25,6 +25,21 @@ func set_score(value):
 func _physics_process(delta):
 	movement()
 
+func _input(event):
+	if event is InputEventScreenTouch:
+		_enable_android_controls()
+	elif event is InputEventKey:
+		_disable_android_controls()
+
+func _disable_android_controls():
+	$InputControl/Left.hide()
+	$InputControl/Right.hide()
+
+
+func _enable_android_controls():
+	$InputControl/Left.show()
+	$InputControl/Right.show()
+
 
 func movement() -> Vector2:
 	var input_direction := Vector2(
