@@ -2,14 +2,18 @@ class_name GameWorlds
 extends Node2D
 tool # So editor warnings become enabled.
 
-
-export(float) var start_game_interval := 3
-export(float) var upper_spawn_interval := 3
-export(float) var downer_spawn_interval := 3
+# difficulty_scaler describes by how much the spawning intervals for
+# both types of items will be changed. 
+#
+# Although not intended, negative values can be used to increase interval of spawns.
+export(float) var difficulty_scaler := 0.3
+export(float) var start_game_interval := 3.0
+export(float) var upper_spawn_interval := 3.0
+export(float) var downer_spawn_interval := 3.0
 export(float, 0, 1) var randomize_spawn_intervals := 0.25
 
 
-## How much Player gains for surviving, per second. Defaults to 1. Can be negative.
+# How much Player gains for surviving, per second. Defaults to 1. Can be negative.
 export(int) var survival_value := 1
 export(int) var player_initial_score := 0
 
@@ -18,6 +22,7 @@ export(PackedScene) var upper_scene
 export(PackedScene) var downer_scene
 
 
+var difficulty_timer: Timer
 var start_timer: Timer
 var downer_timer: Timer
 var upper_timer: Timer
@@ -31,6 +36,7 @@ func _ready():
 	player.survival_gain_rate = survival_value
 	player.set_score(player_initial_score)
 	
+
 	# Setting up timers. Programatically so it's less work making more levels.
 	start_timer = Timer.new()
 	start_timer.wait_time = start_game_interval
@@ -47,6 +53,11 @@ func _ready():
 	upper_timer.wait_time = rand_range(upper_spawn_interval - (upper_spawn_interval * 0.25), upper_spawn_interval + (upper_spawn_interval * randomize_spawn_intervals))	
 	upper_timer.connect("timeout", self, "spawn_upper")
 	add_child(upper_timer)
+
+	difficulty_timer = Timer.new()
+	difficulty_timer.wait_time = 15
+	difficulty_timer.connect("timeout", self, "increase_difficulty")
+	add_child(difficulty_timer)
 	
 	new_game()
 
@@ -55,6 +66,7 @@ func new_game() -> void:
 	print("new_game")
 	player.score = 0
 	player.global_position = $StartPosition.global_position
+	_countdown(start_timer.wait_time)
 	start_timer.start()
 
 
@@ -92,6 +104,31 @@ func spawn_upper():
 	upper_timer.wait_time = rand_range(upper_spawn_interval - (upper_spawn_interval * 0.25), upper_spawn_interval + (upper_spawn_interval * 0.25))	
 	
 
+func increase_difficulty() -> void:
+	upper_spawn_interval -= difficulty_scaler
+	downer_spawn_interval -= difficulty_scaler
+
+
+
+func _countdown(seconds: float):
+	
+	if $CountdownLabel.visible == false:
+		$CountdownLabel.show()
+		
+	$CountdownLabel.text = str(seconds)
+	
+	
+	if seconds <= 0:
+		$CountdownLabel.hide()
+		return
+		
+	
+	yield(get_tree().create_timer(seconds), "timeout")
+	_countdown(seconds - 1)
+
+func _on_ItemDestroyer_body_entered(body):
+	body.queue_free()
+
 
 func _get_configuration_warning():
 	if get_node_or_null("StartPosition") == null:
@@ -103,8 +140,12 @@ func _get_configuration_warning():
 	if downer_scene == null:
 		return "Must select a scene to be \"downer\""
 	
+	if get_node_or_null("CountdownLabel") == null:
+		return "Must have a label named 'CountdownLabel'"
+			
 	return "" # if nothing's wrong.
 
 
-func _on_ItemDestroyer_body_entered(body):
-	body.queue_free()
+
+
+
