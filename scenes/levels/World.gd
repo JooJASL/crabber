@@ -136,6 +136,6 @@ func _get_configuration_warning():
 	return "" # if nothing's wrong.
 
 
-
-
-
+func _on_Player_died():
+	$Player.hide()
+	
