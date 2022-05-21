@@ -5,6 +5,7 @@ signal died()
 
 # Amount of Player lives. Set to -69 to disable the label.
 export(int) var lives := 3 setget set_lives
+export(bool) var has_lives := true
 export(int) var speed = 200
 export(float) var gravity = 90
 
@@ -25,8 +26,9 @@ func set_score(value):
 
 
 func _ready():
-	if lives == -69:
+	if has_lives == false:
 		$CanvasLayer/GUI/Lives.hide()
+		$CanvasLayer/GUI/CenterContainer/Heart.hide()
 
 
 func _physics_process(_delta):
@@ -82,6 +84,9 @@ func _on_ScoreTimer_timeout():
 
 
 func set_lives(value):
+	if has_lives == false: # Just in case
+		return
+	
 	if value < 0:
 		emit_signal("died")
 		value = 0

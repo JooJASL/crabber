@@ -1,8 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/InputControl.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.gd" type="Script" id=2]
 [ext_resource path="res://assets/2D/player.png" type="Texture" id=3]
+[ext_resource path="res://assets/fonts/Kenney Mini Square Mono.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/2D/heart.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 4, 4 )
@@ -24,20 +33,34 @@ polygon = PoolVector2Array( -14.75, 0, -13, -9.25, -3.25, -17.75, 4, -17.75, 13.
 [node name="GUI" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = SubResource( 2 )
 
 [node name="Score" type="Label" parent="CanvasLayer/GUI"]
-margin_left = 32.0
-margin_top = 32.0
-margin_right = 88.0
-margin_bottom = 46.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -28.0
+margin_right = 28.0
+margin_bottom = 40.0
 text = "0"
 align = 1
 
 [node name="Lives" type="Label" parent="CanvasLayer/GUI"]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "3"
+margin_left = 46.0
+margin_right = 46.0
+margin_bottom = 40.0
+text = "3
+"
 align = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/GUI"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 43.0
+margin_bottom = 43.0
+
+[node name="Heart" type="Sprite" parent="CanvasLayer/GUI/CenterContainer"]
+position = Vector2( 19, 20 )
+texture = ExtResource( 5 )
 
 [node name="ScoreTimer" type="Timer" parent="."]
 

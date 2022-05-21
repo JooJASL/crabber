@@ -18,6 +18,7 @@ export(float, 0, 1) var randomize_spawn_intervals := 0.25
 
 # How much Player gains for surviving, per second. Defaults to 1. Can be negative.
 export(int) var survival_value := 1
+export(int) var player_initial_lives := 3
 export(int) var player_initial_score := 0
 
 
@@ -37,7 +38,7 @@ onready var player := find_node("Player")
 func _ready():
 	randomize()
 	player.survival_gain_rate = survival_value
-	player.set_score(player_initial_score)
+	player.score = player_initial_score
 	
 	downer_timer = Timer.new()
 	downer_timer.wait_time = rand_range(downer_spawn_interval - (downer_spawn_interval * 0.25), downer_spawn_interval + (downer_spawn_interval * randomize_spawn_intervals))
@@ -58,7 +59,8 @@ func _ready():
 
 
 func new_game() -> void:
-	player.score = 0
+	player.score = player_initial_score
+	player.lives = player_initial_lives
 	player.global_position = $StartPosition.global_position
 	_countdown(3)
 
