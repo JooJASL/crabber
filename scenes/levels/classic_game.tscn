@@ -1,14 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/levels/World.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/FallingItem.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 193, 17 )
+extents = Vector2( 328, 16 )
 
 [node name="classic_game" type="Node2D"]
 script = ExtResource( 1 )
 difficulty_scaler = null
+upper_scene = ExtResource( 3 )
+downer_scene = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 368.0
@@ -18,12 +21,14 @@ color = Color( 0.921569, 1, 0, 1 )
 [node name="Floor" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2( 183, 799 )
+position = Vector2( 184, 800 )
 shape = SubResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Floor"]
+position = Vector2( -30.8333, 0 )
+scale = Vector2( 1.14583, 1 )
 color = Color( 0.137255, 0.635294, 0, 1 )
-polygon = PoolVector2Array( -8, 816, -8, 784, 376, 784, 376, 816 )
+polygon = PoolVector2Array( -8, 816, -8, 784, 376, 784, 376, 801.089, 376, 816 )
 
 [node name="StartPosition" type="Position2D" parent="."]
 position = Vector2( 184, 752 )

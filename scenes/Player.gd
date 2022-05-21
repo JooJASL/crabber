@@ -24,6 +24,7 @@ func set_score(value):
 
 func _physics_process(delta):
 	movement()
+	wrap_around_screen()
 
 func _input(event):
 	if event is InputEventScreenTouch:
@@ -39,6 +40,14 @@ func _disable_android_controls():
 func _enable_android_controls():
 	$InputControl/Left.show()
 	$InputControl/Right.show()
+
+
+func wrap_around_screen() -> void:
+	if global_position.x <= -20:
+		global_position.x = OS.window_size.x
+	
+	if global_position.x >= OS.window_size.x + 20:
+		global_position.x = 0
 
 
 func movement() -> Vector2:
@@ -60,6 +69,5 @@ func _on_Collector_body_entered(body: FallingItem):
 
 
 func _on_ScoreTimer_timeout():
-	print("scoretimer_timeout")
 	set_score(score + survival_gain_rate)
 

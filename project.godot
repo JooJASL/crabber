@@ -34,7 +34,7 @@ _global_script_class_icons={
 
 config/name="Crabber"
 config/description="My first android game made in the open-source Godot Game Engine. 2D and simple."
-run/main_scene="res://scenes/levels/Main.tscn"
+run/main_scene="res://scenes/ui/Menu.tscn"
 config/icon="res://icon.png"
 
 [display]

@@ -1,3 +1,6 @@
+## GameWorlds
+# The manager of the game loop. Handles both instancing falling items, as well as all the timers and the 
+# system of increasing difficulty.
 class_name GameWorlds
 extends Node2D
 tool # So editor warnings become enabled.
@@ -38,11 +41,11 @@ func _ready():
 	
 
 	# Setting up timers. Programatically so it's less work making more levels.
-	start_timer = Timer.new()
-	start_timer.wait_time = start_game_interval
-	start_timer.one_shot = true
-	start_timer.connect("timeout", self, "start_game")
-	add_child(start_timer)
+	# start_timer = Timer.new()
+	# start_timer.wait_time = start_game_interval
+	# start_timer.one_shot = true
+	# start_timer.connect("timeout", self, "start_game")
+	# add_child(start_timer)
 	
 	downer_timer = Timer.new()
 	downer_timer.wait_time = rand_range(downer_spawn_interval - (downer_spawn_interval * 0.25), downer_spawn_interval + (downer_spawn_interval * randomize_spawn_intervals))
@@ -63,15 +66,12 @@ func _ready():
 
 
 func new_game() -> void:
-	print("new_game")
 	player.score = 0
 	player.global_position = $StartPosition.global_position
-	_countdown(start_timer.wait_time)
-	start_timer.start()
+	_countdown(3)
 
 
 func start_game() -> void:
-	print("start_game timeout")
 	player.get_node("ScoreTimer").start()
 	upper_timer.start()
 	downer_timer.start()
@@ -80,7 +80,6 @@ func start_game() -> void:
 ## spawn_downer spawns falling objects that either decrease the player's score
 ## and other negative stuff.
 func spawn_downer():
-	print("spawn_downer timeout")
 	var downer = downer_scene.instance()
 	
 	downer.global_position.x = rand_range(0, OS.get_real_window_size().x - 50) # 50 arbitrary
@@ -94,7 +93,6 @@ func spawn_downer():
 ## spawn_upper spawns falling objects that either increase the score of the
 ## player or are helpful in some other way.
 func spawn_upper():
-	print("spawn_upper timeout")	
 	var upper = upper_scene.instance()
 	
 	upper.global_position.x = rand_range(0, OS.get_real_window_size().x - 50) # the 50 is arbitrary
@@ -109,22 +107,20 @@ func increase_difficulty() -> void:
 	downer_spawn_interval -= difficulty_scaler
 
 
-
 func _countdown(seconds: float):
-	
+	$CountdownLabel.text = str(seconds)
+
 	if $CountdownLabel.visible == false:
 		$CountdownLabel.show()
-		
-	$CountdownLabel.text = str(seconds)
-	
 	
 	if seconds <= 0:
 		$CountdownLabel.hide()
-		return
-		
+		start_game()
+		return	
 	
 	yield(get_tree().create_timer(seconds), "timeout")
 	_countdown(seconds - 1)
+
 
 func _on_ItemDestroyer_body_entered(body):
 	body.queue_free()
