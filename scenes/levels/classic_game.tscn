@@ -19,7 +19,7 @@ downer_scene = ExtResource( 4 )
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 368.0
 margin_bottom = 808.0
-color = Color( 0, 0.694118, 1, 1 )
+color = Color( 0.921569, 0.760784, 0.458824, 1 )
 
 [node name="Floor" type="StaticBody2D" parent="."]
 
@@ -30,7 +30,7 @@ shape = SubResource( 1 )
 [node name="Polygon2D" type="Polygon2D" parent="Floor"]
 position = Vector2( -30.8333, 0 )
 scale = Vector2( 1.14583, 1 )
-color = Color( 0.137255, 0.635294, 0, 1 )
+color = Color( 0.12549, 0.133333, 0.0823529, 1 )
 polygon = PoolVector2Array( -8, 816, -8, 784, 376, 784, 376, 801.089, 376, 816 )
 
 [node name="StartPosition" type="Position2D" parent="."]

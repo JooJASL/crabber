@@ -16,7 +16,7 @@ classic_game = ExtResource( 2 )
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.811765, 0.184314, 0.184314, 1 )
+color = Color( 0.921569, 0.760784, 0.458824, 1 )
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 anchor_left = 0.5
