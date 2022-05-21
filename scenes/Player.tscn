@@ -1,10 +1,30 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/InputControl.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.gd" type="Script" id=2]
 [ext_resource path="res://assets/2D/player.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/Kenney Mini Square Mono.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/2D/heart.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/Kenney High Square.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=3]
+size = 25
+font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 0.560784, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.501961, 0.227451, 0.0431373, 1 )
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -12,6 +32,9 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
+Button/fonts/font = SubResource( 3 )
+Button/styles/hover = SubResource( 4 )
+Button/styles/normal = SubResource( 5 )
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 3, 3 )
@@ -62,6 +85,72 @@ margin_bottom = 43.0
 position = Vector2( 19, 20 )
 texture = ExtResource( 5 )
 
+[node name="GameoverPopup" type="Popup" parent="CanvasLayer/GUI"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -95.0
+margin_top = -100.0
+margin_right = 95.0
+margin_bottom = 100.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/GUI/GameoverPopup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -110.5
+margin_top = -110.5
+margin_right = 110.5
+margin_bottom = 110.5
+color = Color( 0.792157, 0.352941, 0.180392, 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/GUI/GameoverPopup"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = -40.0
+margin_right = 72.0
+
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/GUI/GameoverPopup/CenterContainer"]
+margin_top = 7.0
+margin_right = 144.0
+margin_bottom = 32.0
+
+[node name="Menu" type="Button" parent="CanvasLayer/GUI/GameoverPopup/CenterContainer/Buttons"]
+margin_right = 56.0
+margin_bottom = 25.0
+text = "  Menu  "
+
+[node name="Restart" type="Button" parent="CanvasLayer/GUI/GameoverPopup/CenterContainer/Buttons"]
+margin_left = 60.0
+margin_right = 144.0
+margin_bottom = 25.0
+text = "  RESTART  "
+
+[node name="Gameover" type="Label" parent="CanvasLayer/GUI/GameoverPopup"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -96.0
+margin_right = 96.0
+margin_bottom = 40.0
+text = "GAMEOVER"
+
+[node name="Final Score" type="Label" parent="CanvasLayer/GUI/GameoverPopup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+text = "0"
+
 [node name="ScoreTimer" type="Timer" parent="."]
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -72,4 +161,6 @@ texture = ExtResource( 3 )
 polygon = PoolVector2Array( -15, 0, -13, -2, -13, -7, -4, -7, -4, -12, -1, -12, -2, -17, 2, -17, 1, -12, 4, -12, 4, -7, 13, -7, 13, -2, 15, 0 )
 
 [connection signal="body_entered" from="Collector" to="." method="_on_Collector_body_entered"]
+[connection signal="pressed" from="CanvasLayer/GUI/GameoverPopup/CenterContainer/Buttons/Menu" to="." method="_on_Menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/GameoverPopup/CenterContainer/Buttons/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]

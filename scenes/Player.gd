@@ -23,6 +23,7 @@ func get_score():
 func set_score(value):
 	score = value
 	score_label.text = str(score)
+	$"CanvasLayer/GUI/GameoverPopup/Final Score".text = str(score)
 
 
 func _ready():
@@ -73,6 +74,10 @@ func wrap_around_screen() -> void:
 		global_position.x = 0
 
 
+func show_game_over():
+	$CanvasLayer/GUI/GameoverPopup.popup_centered()
+
+
 func _on_Collector_body_entered(body: Faller):
 	if body is Faller:
 		body.queue_free()
@@ -87,9 +92,20 @@ func set_lives(value):
 	if has_lives == false: # Just in case
 		return
 	
-	if value < 0:
+	if value <= 0:
 		emit_signal("died")
 		value = 0
 	
 	lives = value
 	$CanvasLayer/GUI/Lives.text = str(lives)
+
+
+
+func _on_Restart_pressed():
+	get_tree().reload_current_scene()
+	$CanvasLayer/GUI/GameoverPopup.hide()
+
+
+func _on_Menu_pressed():
+	get_tree().change_scene_to(load("res://scenes/ui/Menu.tscn"))
+	$CanvasLayer/GUI/GameoverPopup.hide()

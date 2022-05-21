@@ -138,4 +138,8 @@ func _get_configuration_warning():
 
 func _on_Player_died():
 	$Player.hide()
-	
+	$Player.get_node("ScoreTimer").stop()
+	$Player.show_game_over()
+	upper_timer.stop()
+	downer_timer.stop()
+	difficulty_timer.stop()
