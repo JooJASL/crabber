@@ -23,6 +23,7 @@ func get_score():
 func set_score(value):
 	score = value
 	score_label.text = str(score)
+
 	$"CanvasLayer/GUI/GameoverPopup/Final Score".text = str(score)
 
 
@@ -82,6 +83,8 @@ func _on_Collector_body_entered(body: Faller):
 	if body is Faller:
 		body.queue_free()
 		body.special_effect(self)
+		if body.collection_value > 0:
+			$FX/Coin.play()
 
 
 func _on_ScoreTimer_timeout():
@@ -93,8 +96,11 @@ func set_lives(value):
 		return
 	
 	if value <= 0:
+		$FX/Gameover.play()
 		emit_signal("died")
 		value = 0
+	else:
+		$FX/Hurt.play()
 	
 	lives = value
 	$CanvasLayer/GUI/Lives.text = str(lives)
