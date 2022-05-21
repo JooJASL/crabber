@@ -14,7 +14,7 @@ font_data = ExtResource( 4 )
 default_font = SubResource( 1 )
 
 [node name="Player" type="KinematicBody2D"]
-scale = Vector2( 4, 4 )
+scale = Vector2( 3, 3 )
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

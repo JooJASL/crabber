@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/levels/World.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/fallers/Upper.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/fallers/Downer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/levels/countdown_label_theme.tres" type="Theme" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 328, 16 )
@@ -43,6 +44,7 @@ margin_left = 152.0
 margin_top = 272.0
 margin_right = 192.0
 margin_bottom = 286.0
+theme = ExtResource( 5 )
 text = "3"
 align = 1
 
