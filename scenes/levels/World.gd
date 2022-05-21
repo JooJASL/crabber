@@ -78,6 +78,7 @@ func spawn_downer():
 	
 	downer.global_position.x = rand_range(0, OS.get_real_window_size().x - 50) # 50 arbitrary
 	downer.global_position.y = rand_range(10, 50) # arbitrary numbersr
+	downer.scale *= rand_range(0.8, 1.2)
 	add_child(downer)
 	
 	downer_timer.wait_time = rand_range(downer_spawn_interval - (downer_spawn_interval * 0.25), downer_spawn_interval + (downer_spawn_interval * 0.25))
@@ -91,6 +92,7 @@ func spawn_upper():
 	
 	upper.global_position.x = rand_range(0, OS.get_real_window_size().x - 50) # the 50 is arbitrary
 	upper.global_position.y = rand_range(10, 80) # arbitrary numbersr
+	upper.scale *= rand_range(0.8, 1.2)
 	add_child(upper)
 	
 	upper_timer.wait_time = rand_range(upper_spawn_interval - (upper_spawn_interval * 0.25), upper_spawn_interval + (upper_spawn_interval * 0.25))	
