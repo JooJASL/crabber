@@ -1,22 +1,25 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/levels/World.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/FallingItem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/fallers/Upper.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/fallers/Downer.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 328, 16 )
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 228, 10 )
+
 [node name="classic_game" type="Node2D"]
 script = ExtResource( 1 )
-difficulty_scaler = null
 upper_scene = ExtResource( 3 )
-downer_scene = ExtResource( 3 )
+downer_scene = ExtResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 368.0
 margin_bottom = 808.0
-color = Color( 0.921569, 1, 0, 1 )
+color = Color( 0, 0.694118, 1, 1 )
 
 [node name="Floor" type="StaticBody2D" parent="."]
 
@@ -42,3 +45,13 @@ margin_right = 192.0
 margin_bottom = 286.0
 text = "3"
 align = 1
+
+[node name="ItemDestroyer" type="Area2D" parent="."]
+position = Vector2( 200, 784 )
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemDestroyer"]
+self_modulate = Color( 0.513726, 0.0196078, 0.0196078, 1 )
+position = Vector2( -12, 0 )
+shape = SubResource( 2 )

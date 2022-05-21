@@ -9,7 +9,7 @@ tool # So editor warnings become enabled.
 # both types of items will be changed. 
 #
 # Although not intended, negative values can be used to increase interval of spawns.
-export(float) var difficulty_scaler := 0.3
+export(float) var difficulty_scaler := 0.2
 export(float) var start_game_interval := 3.0
 export(float) var upper_spawn_interval := 3.0
 export(float) var downer_spawn_interval := 3.0
@@ -38,14 +38,6 @@ func _ready():
 	randomize()
 	player.survival_gain_rate = survival_value
 	player.set_score(player_initial_score)
-	
-
-	# Setting up timers. Programatically so it's less work making more levels.
-	# start_timer = Timer.new()
-	# start_timer.wait_time = start_game_interval
-	# start_timer.one_shot = true
-	# start_timer.connect("timeout", self, "start_game")
-	# add_child(start_timer)
 	
 	downer_timer = Timer.new()
 	downer_timer.wait_time = rand_range(downer_spawn_interval - (downer_spawn_interval * 0.25), downer_spawn_interval + (downer_spawn_interval * randomize_spawn_intervals))

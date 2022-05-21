@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/FallingItem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/fallers/Upper.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/World.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]

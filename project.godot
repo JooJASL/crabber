@@ -10,9 +10,14 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "RigidBody2D",
-"class": "FallingItem",
+"class": "Faller",
 "language": "GDScript",
-"path": "res://scenes/FallingItem.gd"
+"path": "res://addons/Faller/faller.gd"
+}, {
+"base": "Resource",
+"class": "FallerSpecial",
+"language": "GDScript",
+"path": "res://scenes/fallers/FallerSpecial.gd"
 }, {
 "base": "Node2D",
 "class": "GameWorlds",
@@ -25,7 +30,8 @@ _global_script_classes=[ {
 "path": "res://scenes/Player.gd"
 } ]
 _global_script_class_icons={
-"FallingItem": "",
+"Faller": "",
+"FallerSpecial": "",
 "GameWorlds": "",
 "Player": ""
 }
@@ -43,6 +49,34 @@ window/size/width=360
 window/size/height=800
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/Faller/plugin.cfg" )
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
 
 [input]
 

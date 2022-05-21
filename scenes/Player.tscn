@@ -47,6 +47,12 @@ margin_bottom = 46.0
 text = "0"
 align = 1
 
+[node name="Lives" type="Label" parent="CanvasLayer/GUI"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "3"
+align = 1
+
 [node name="ScoreTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="Collector" to="." method="_on_Collector_body_entered"]

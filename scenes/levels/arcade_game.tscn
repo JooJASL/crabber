@@ -1,16 +1,21 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/levels/World.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/FallingItem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/fallers/ArcadeDowner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/fallers/ArcadeUpper.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 193, 17 )
+extents = Vector2( 284, 17 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 228, 10 )
 
 [node name="arcade_game" type="Node2D"]
 script = ExtResource( 1 )
-difficulty_scaler = null
-upper_scene = ExtResource( 3 )
+survival_value = -1
+player_initial_score = 100
+upper_scene = ExtResource( 4 )
 downer_scene = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -21,7 +26,7 @@ color = Color( 0, 1, 0.6, 1 )
 [node name="Floor" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2( 183, 799 )
+position = Vector2( 180, 799 )
 shape = SubResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Floor"]
@@ -32,12 +37,22 @@ polygon = PoolVector2Array( -8, 816, -8, 784, 376, 784, 376, 816 )
 position = Vector2( 184, 752 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+lives = -69
 
 [node name="CountdownLabel" type="Label" parent="."]
-visible = false
 margin_left = 128.0
 margin_top = 272.0
 margin_right = 168.0
 margin_bottom = 286.0
 text = "3"
 align = 1
+
+[node name="ItemDestroyer" type="Area2D" parent="."]
+position = Vector2( 200, 784 )
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemDestroyer"]
+self_modulate = Color( 0.513726, 0.0196078, 0.0196078, 1 )
+position = Vector2( -12, 0 )
+shape = SubResource( 2 )
