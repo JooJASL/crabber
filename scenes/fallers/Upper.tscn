@@ -9,6 +9,7 @@ radius = 14.5022
 [node name="Upper" type="RigidBody2D"]
 collision_layer = 4
 script = ExtResource( 1 )
+collection_value = 5
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

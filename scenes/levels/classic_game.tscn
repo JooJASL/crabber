@@ -14,6 +14,8 @@ extents = Vector2( 228, 10 )
 
 [node name="classic_game" type="Node2D"]
 script = ExtResource( 1 )
+difficulty_scaler = 0.3
+thresholds = [  ]
 upper_scene = ExtResource( 3 )
 downer_scene = ExtResource( 4 )
 
